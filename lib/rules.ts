@@ -18,6 +18,13 @@ const R: rules = {
       message: formatMessage(message, { max }),
     });
   },
+  between([min, max], message = "Out of range, must be between :min and :max") {
+    return (normal) => ({
+      // utils.length makes this rule pass until there is a value, so that R.required may be optional
+      pass: !length(normal, [1]) ? true : length(normal, [min, max]),
+      message: formatMessage(message, { min, max }),
+    });
+  },
 };
 
 // Add a custom rule
