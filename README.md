@@ -29,6 +29,38 @@ console.log(person.set({}));
 console.log(person.validate());
 ```
 
+### Adding Custom Rules
+
+You can add a custom rule to the validator `R` object.
+
+#### Basic Example
+
+```js
+import { R, utils } from "use-model";
+
+R.add("barcode", (message) => {
+  return (normal) => ({
+    // utils.length makes this rule pass until there is a value, so that R.required may be optional
+    pass: !utils.length(normal, [1])
+      ? true
+      : /^123456\d{8}$/.test(normal.value),
+    message: message || "Invalid barcode",
+  });
+});
+```
+
+#### Example with Params
+
+```js
+R.add("between", ([min, max], message) => {
+  return (normal) => ({
+    // utils.length makes this rule pass until there is a value, so that R.required may be optional
+    pass: !utils.length(normal, [1]) ? true : utils.length(normal, [min, max]),
+    message: utils.formatMessage(message || "Out of range, must be between :min and :max", { min, max }),
+  });
+});
+```
+
 ### Feature Milestones
 
 - [ ] Event emitter per model

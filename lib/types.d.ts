@@ -19,3 +19,7 @@ export type dataType = {
 export type rulesType = {
   [key: string]: Array<Function>;
 };
+
+export type rules = {
+  [key: string]: Function;
+};

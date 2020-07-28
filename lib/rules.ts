@@ -1,26 +1,7 @@
-import formatMessage from "./format-message";
+import { rules } from "./types";
+import { length, formatMessage } from "./utils";
 
-function length(normal, [min, max]) {
-  let size = 0;
-  if (normal.type === "nullish") {
-    size = 0;
-  }
-  if (normal.type === "boolean") {
-    size = normal.value ? 1 : 0;
-  }
-  if (normal.type === "string") {
-    size = normal.value.length;
-  }
-  if (normal.type === "file") {
-    size = normal.size;
-  }
-  if (normal.type === "object" && normal.value.hasOwnProperty("length")) {
-    size = normal.value.length;
-  }
-  return size >= min && size <= max;
-}
-
-export default {
+const R: rules = {
   required: (message) => (normal) => ({
     pass: length(normal, [0, Infinity]),
     message: formatMessage(message || "required"),
@@ -38,3 +19,10 @@ export default {
     });
   },
 };
+
+// Add a custom rule
+R.add = (rule: string, fn: Function) => {
+  R[rule] = fn;
+};
+
+export default R;
