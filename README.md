@@ -52,6 +52,8 @@ R.add("barcode", (message = "Invalid barcode") => {
 #### Example with Params
 
 ```js
+import { R, utils } from "use-model";
+
 R.add("between", ([min, max], message = "Out of range, must be between :min and :max") => {
   return (normal) => ({
     // utils.length makes this rule pass until there is a value, so that R.required may be optional
