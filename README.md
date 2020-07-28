@@ -38,13 +38,13 @@ You can add a custom rule to the validator `R` object.
 ```js
 import { R, utils } from "use-model";
 
-R.add("barcode", (message) => {
+R.add("barcode", (message = "Invalid barcode") => {
   return (normal) => ({
     // utils.length makes this rule pass until there is a value, so that R.required may be optional
     pass: !utils.length(normal, [1])
       ? true
       : /^123456\d{8}$/.test(normal.value),
-    message: message || "Invalid barcode",
+    message,
   });
 });
 ```
