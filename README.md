@@ -40,7 +40,7 @@ import { R, utils } from "use-model";
 
 R.add("barcode", (message = "Invalid barcode") => {
   return (normal) => ({
-    // utils.length makes this rule pass until there is a value, so that R.required may be optional
+    // utils.length makes this rule optional so it can be used with R.required
     pass: !utils.length(normal, [1])
       ? true
       : /^123456\d{8}$/.test(normal.value),
@@ -54,13 +54,18 @@ R.add("barcode", (message = "Invalid barcode") => {
 ```js
 import { R, utils } from "use-model";
 
-R.add("between", ([min, max], message = "Out of range, must be between :min and :max") => {
-  return (normal) => ({
-    // utils.length makes this rule pass until there is a value, so that R.required may be optional
-    pass: !utils.length(normal, [1]) ? true : utils.length(normal, [min, max]),
-    message: utils.formatMessage(message, { min, max }),
-  });
-});
+R.add(
+  "between",
+  ([min, max], message = "Out of range, must be between :min and :max") => {
+    return (normal) => ({
+      // utils.length makes this rule optional so it can be used with R.required
+      pass: !utils.length(normal, [1])
+        ? true
+        : utils.length(normal, [min, max]),
+      message: utils.formatMessage(message, { min, max }),
+    });
+  }
+);
 ```
 
 ### Feature Milestones
