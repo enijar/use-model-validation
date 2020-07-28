@@ -14,8 +14,8 @@ const person = createModel({
   rules: {
     firstName: [R.max(10, "Too long, must be :max characters or less")],
     lastName: [R.max(20, "Too long, must be :max characters or less")],
-    email: [R.required("Email is required")]
-  }
+    email: [R.required("Email is required")],
+  },
 });
 
 // Update the person model with some data
