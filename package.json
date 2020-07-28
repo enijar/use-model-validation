@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "scripts": {
+    "format": "npx prettier@^2.0.5 lib --write",
+    "build": "npx tsc"
+  },
+  "devDependencies": {
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.7"
+  }
+}
