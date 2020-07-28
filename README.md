@@ -28,3 +28,12 @@ console.log(person.set({}));
 // Validate model, using the rules defined inside createModel
 console.log(person.validate());
 ```
+
+### Feature Milestones
+
+- [ ] Event emitter per model
+- [ ] Global event emitter for all models (created, updated, error)
+- [ ] Global field rule definitions
+- [ ] Global field error message definitions
+- [ ] Better TypeScript support
+- [ ] 100% test coverage
