@@ -2,20 +2,20 @@ import { rules } from "./types";
 import { length, formatMessage } from "./utils";
 
 const R: rules = {
-  required: (message) => (normal) => ({
+  required: (message = "Required") => (normal) => ({
     pass: length(normal, [0, Infinity]),
-    message: formatMessage(message || "required"),
+    message: formatMessage(message),
   }),
-  min(min, message) {
+  min(min, message = "Too small, min: :min") {
     return (normal) => ({
       pass: length(normal, [min, Infinity]),
-      message: formatMessage(message || "Too small, min: :min", { min }),
+      message: formatMessage(message, { min }),
     });
   },
-  max(max, message) {
+  max(max, message = "Too large, max: :max") {
     return (normal) => ({
       pass: length(normal, [0, max]),
-      message: formatMessage(message || "Too large, max: :max", { max }),
+      message: formatMessage(message, { max }),
     });
   },
 };

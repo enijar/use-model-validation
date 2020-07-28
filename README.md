@@ -52,11 +52,11 @@ R.add("barcode", (message) => {
 #### Example with Params
 
 ```js
-R.add("between", ([min, max], message) => {
+R.add("between", ([min, max], message = "Out of range, must be between :min and :max") => {
   return (normal) => ({
     // utils.length makes this rule pass until there is a value, so that R.required may be optional
     pass: !utils.length(normal, [1]) ? true : utils.length(normal, [min, max]),
-    message: utils.formatMessage(message || "Out of range, must be between :min and :max", { min, max }),
+    message: utils.formatMessage("Out of range, must be between :min and :max", { min, max }),
   });
 });
 ```
