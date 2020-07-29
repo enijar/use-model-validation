@@ -28,3 +28,12 @@ export function formatMessage(message, params = {}) {
   }
   return formattedMessage;
 }
+
+export function pattern(normal, regex) {
+  // Only strings can be pattern matched
+  if (normal.type !== "string") {
+    // @todo more thinking is needed about weather to throw an error or return true/false here
+    return true;
+  }
+  return normal.value.test(regex);
+}

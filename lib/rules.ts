@@ -1,5 +1,5 @@
 import { rules } from "./types";
-import { length, formatMessage } from "./utils";
+import { length, formatMessage, pattern } from "./utils";
 
 const R: rules = {
   required: (message = "Required") => (normal) => ({
@@ -22,6 +22,12 @@ const R: rules = {
     return (normal) => ({
       pass: !length(normal, [1]) ? true : length(normal, [min, max]),
       message: formatMessage(message, { min, max }),
+    });
+  },
+  format(regex, message = "Invalid format") {
+    return (normal) => ({
+      pass: !length(normal, [1]) ? true : pattern(normal, regex),
+      message: formatMessage(message, { regex }),
     });
   },
 };
