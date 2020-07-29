@@ -8,7 +8,7 @@ const R: rules = {
   }),
   min(min, message = "Too small, min: :min") {
     return (normal) => ({
-      pass: length(normal, [min, Infinity]),
+      pass: !length(normal, [1]) ? true : length(normal, [min, Infinity]),
       message: formatMessage(message, { min }),
     });
   },
