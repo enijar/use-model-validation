@@ -3,7 +3,7 @@ import { normalizedValueType, valueType } from "./types";
 const mode = globalThis.process?.release?.name || "browser";
 
 export default function normalizeValue(value: valueType): normalizedValueType {
-  let type: string = "unknown";
+  let type: string = typeof value;
   let normal: valueType;
 
   switch (type) {
