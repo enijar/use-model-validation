@@ -1,5 +1,5 @@
 import * as React from "react";
-import Basic from "./basic";
+import Basic from "./examples/basic";
 
 export default [
   {
