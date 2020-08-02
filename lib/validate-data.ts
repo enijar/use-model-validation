@@ -10,6 +10,9 @@ export default function validate(
     valid: true,
   };
   for (const field in rules) {
+    if (!rules.hasOwnProperty(field)) {
+      continue;
+    }
     const normalizedValue = normalizeValue(data[field]);
     rules[field].forEach((rule) => {
       const result = rule(normalizedValue);
