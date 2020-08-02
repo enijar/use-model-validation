@@ -3,7 +3,7 @@ import { length, formatMessage, pattern } from "./utils";
 
 const R: rules = {
   required: (message = "Required") => (normal) => ({
-    pass: length(normal, [0, Infinity]),
+    pass: length(normal, [1, Infinity]),
     message: formatMessage(message),
   }),
   min(min, message = "Too small, min: :min") {
