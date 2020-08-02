@@ -1,4 +1,5 @@
 import validateData from "./validate-data";
+import { validationType } from "./types";
 
 export default function createModel({ rules }) {
   const data = {};
@@ -32,18 +33,18 @@ export default function createModel({ rules }) {
   }
 
   return {
-    set(data) {
+    set(data): any {
       set(data);
       return this.get();
     },
-    update(data) {
+    update(data): any {
       update(data);
       return get();
     },
-    validate() {
+    validate(): validationType {
       return validateData(data, rules);
     },
-    get() {
+    get(): any {
       return get();
     },
   };
