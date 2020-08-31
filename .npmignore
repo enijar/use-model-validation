@@ -1,6 +1,9 @@
 examples/
 lib/
 test/
+.idea/
+integration/
+.DS_Store
 .editorconfig
 README.md
 tsconfig.json
