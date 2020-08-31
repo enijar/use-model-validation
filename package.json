@@ -1,6 +1,10 @@
 {
-  "private": true,
+  "private": false,
   "type": "module",
+  "version": "0.0.0",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "scripts": {
     "examples": "npx webpack-dev-server --mode development",
     "format": "npx prettier@^2.0.5 lib --write",
