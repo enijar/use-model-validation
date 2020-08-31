@@ -74,5 +74,5 @@ R.add(
 - [ ] Global event emitter for all models (created, updated, error)
 - [ ] Global field rule definitions
 - [ ] Global field error message definitions
-- [ ] Better TypeScript support
-- [ ] 100% test coverage
+- [x] Better TypeScript support
+- [x] 100% test coverage
