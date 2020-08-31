@@ -1,9 +1,7 @@
 import validateData from "./validate-data";
 import { validationType } from "./types";
 
-export default function createModel({ rules }) {
-  const data = {};
-
+export default function createModel({ rules, data = {} }) {
   function update(freshData = {}) {
     for (const field in freshData) {
       if (!freshData.hasOwnProperty(field)) {
