@@ -35,10 +35,5 @@ export function formatMessage(message, params = {}): string {
 }
 
 export function pattern(normal, regex): boolean {
-  // Only strings can be pattern matched
-  if (normal.type !== "string") {
-    // @todo more thinking is needed about weather to throw an error or return true/false here
-    return true;
-  }
-  return normal.value.test(regex);
+  return regex.test(String(normal.value));
 }
