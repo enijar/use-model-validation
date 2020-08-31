@@ -2,7 +2,10 @@ import validateData from "./validate-data";
 import { dataType, validationType } from "./types";
 
 export default function createModel({ rules, data = {} }) {
-  function update(freshData = {}) {
+  function update(freshData: dataType | Function = {}) {
+    if (typeof freshData === "function") {
+      freshData = { ...freshData(data) };
+    }
     for (const field in freshData) {
       if (!freshData.hasOwnProperty(field)) {
         continue;
@@ -15,7 +18,10 @@ export default function createModel({ rules, data = {} }) {
     return { ...data };
   }
 
-  function set(newData) {
+  function set(newData: dataType | Function) {
+    if (typeof newData === "function") {
+      newData = { ...newData(data) };
+    }
     for (const field in data) {
       if (!data.hasOwnProperty(field)) {
         continue;
@@ -31,11 +37,11 @@ export default function createModel({ rules, data = {} }) {
   }
 
   return {
-    set(data): dataType {
+    set(data: dataType | Function): dataType {
       set(data);
       return this.get();
     },
-    update(data): dataType {
+    update(data: dataType | Function): dataType {
       update(data);
       return get();
     },

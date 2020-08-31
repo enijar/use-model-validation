@@ -16,9 +16,6 @@ export function length(normal, [min = 0, max = Infinity]): boolean {
     if (normal.value.hasOwnProperty("length")) {
       size = normal.value.length;
     }
-    if (normal.value instanceof Date) {
-      size = normal.value.length;
-    }
   }
   return size >= min && size <= max;
 }

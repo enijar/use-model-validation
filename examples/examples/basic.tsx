@@ -18,10 +18,14 @@ const person = createModel({
     email: [R.required("This is required")],
     dob: [
       R.required("This is required"),
-      R.min(
-        () => Date.now() - 1000 * 60 * 60 * 24 * 365 * 18,
-        "You must be 18 or older"
-      ), // 18 years
+      R.test((data) => {
+        console.log(new Date(data.dob).getTime() >= Date.now());
+        return new Date(data.dob).getTime() <= Date.now();
+      }, "Your date of birth can't be in the future"),
+      R.test((data) => {
+        const TS = Date.now() - 1000 * 60 * 60 * 24 * 365 * 18; // 18 years
+        return new Date(data.dob).getTime() <= TS;
+      }, "You must be 18 or older"),
     ],
     rating: [R.between([10, 100])],
   },
@@ -41,12 +45,7 @@ export default function Basic() {
 
   const handleChange = React.useCallback(
     ({ target }) => {
-      const name = target.name;
-      let value = target.value;
-      if (name === "date") {
-        value = new Date(value);
-      }
-      setData(person.update({ [name]: value }));
+      setData(person.update({ [target.name]: target.value }));
     },
     [setData]
   );

@@ -15,7 +15,10 @@ export default function validate(
     }
     const normalizedValue = normalizeValue(data[field]);
     rules[field].forEach((rule) => {
-      const result = rule(normalizedValue);
+      if (validation.errors.hasOwnProperty(field)) {
+        return;
+      }
+      const result = rule(normalizedValue, data);
       if (!result.pass) {
         validation.valid = false;
         validation.errors[field] = result.message;

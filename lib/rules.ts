@@ -10,7 +10,6 @@ const R: ruleMethodsType = {
     if (typeof min === "function") {
       min = min();
     }
-    console.log({ min });
     return (normal) => ({
       pass: !length(normal, [1]) ? true : length(normal, [min, Infinity]),
       message: formatMessage(message, { min }),
@@ -20,10 +19,12 @@ const R: ruleMethodsType = {
     if (typeof max === "function") {
       max = max();
     }
-    return (normal) => ({
-      pass: length(normal, [0, max]),
-      message: formatMessage(message, { max }),
-    });
+    return (normal) => {
+      return {
+        pass: length(normal, [0, max]),
+        message: formatMessage(message, { max }),
+      };
+    };
   },
   between(range, message = "Out of range, must be between :min and :max") {
     if (typeof range === "function") {
@@ -33,6 +34,12 @@ const R: ruleMethodsType = {
     return (normal) => ({
       pass: !length(normal, [1]) ? true : length(normal, [min, max]),
       message: formatMessage(message, { min, max }),
+    });
+  },
+  test(fn, message = "Invalid") {
+    return (normal, data = {}) => ({
+      pass: fn(data),
+      message: formatMessage(message),
     });
   },
   format(regex, message = "Invalid format") {

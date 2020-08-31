@@ -1,10 +1,10 @@
 import { normalizedValueType, valueType } from "./types";
 
-const mode = globalThis.process?.release?.name || "browser";
+const mode = globalThis?.process?.release?.name || "browser";
 
 export default function normalizeValue(value: valueType): normalizedValueType {
   let type: string = typeof value;
-  let normal: valueType;
+  let normal: valueType = value;
 
   switch (type) {
     case "string":
@@ -20,14 +20,11 @@ export default function normalizeValue(value: valueType): normalizedValueType {
       if (mode === "browser" && value instanceof File) {
         type = "file";
       }
-      if ([undefined, null].indexOf(value)) {
+      if ([undefined, null].indexOf(value) > -1) {
         type = "nullish";
-        value = null;
+        normal = null;
       }
   }
 
-  return {
-    type,
-    value: normal,
-  };
+  return { type, value: normal };
 }
