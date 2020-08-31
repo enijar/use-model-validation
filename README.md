@@ -1,5 +1,3 @@
-> Note: this project is in development. No release exists for this yet. All imports in the examples are not the correct package name.
-
 # Use Model
 
 Create, update, and validate a model with data from a form.
@@ -7,7 +5,7 @@ Create, update, and validate a model with data from a form.
 ### Example Usage
 
 ```js
-import { R, createModel } from "use-model";
+import { R, createModel } from "use-model-validation";
 
 // Define a person model with rules
 const person = createModel({
@@ -36,7 +34,7 @@ You can add a custom rule to the validator `R` object.
 #### Basic Example
 
 ```js
-import { R, utils } from "use-model";
+import { R, utils } from "use-model-validation";
 
 R.add("barcode", (message = "Invalid barcode") => {
   return (normal) => ({
@@ -52,7 +50,7 @@ R.add("barcode", (message = "Invalid barcode") => {
 #### Example with Params
 
 ```js
-import { R, utils } from "use-model";
+import { R, utils } from "use-model-validation";
 
 R.add(
   "between",
