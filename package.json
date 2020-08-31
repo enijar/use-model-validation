@@ -10,9 +10,6 @@
   "description": "Store data in a model and validate that data",
   "author": "Enijar",
   "license": "MIT",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "scripts": {
     "examples": "npx webpack-dev-server --mode development",
     "format": "npx prettier@^2.0.5 lib --write",
