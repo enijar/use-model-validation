@@ -1,0 +1,8 @@
+examples/
+lib/
+test/
+.editorconfig
+README.md
+tsconfig.json
+tsconfig.lib.json
+webpack.config.js
