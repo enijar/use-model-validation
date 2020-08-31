@@ -11,7 +11,7 @@ export default function Field({
 }) {
   const error = errors[name];
   return (
-    <div>
+    <div style={{ marginBottom: "0.5em" }}>
       {label && <label htmlFor={name}>{label}</label>}
       <br />
       <input
@@ -23,7 +23,7 @@ export default function Field({
         {...props}
       />
       <br />
-      {error && <div className="error">{error}</div>}
+      {error && <div style={{ color: "red" }}>{error}</div>}
     </div>
   );
 }
