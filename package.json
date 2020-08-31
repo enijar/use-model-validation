@@ -3,6 +3,7 @@
   "name": "use-model-validation",
   "type": "module",
   "version": "0.0.0",
+  "main": "build",
   "repository": {
     "type": "git",
     "url": "https://github.com/Enijar/use-model"
@@ -15,7 +16,8 @@
     "format": "npx prettier@^2.0.5 lib --write",
     "build": "npx tsc -p tsconfig.lib.json",
     "test": "npx jest",
-    "test-watch": "npx jest --watch"
+    "test-watch": "npx jest --watch",
+    "prepublishOnly": "npm test && npm run build"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
