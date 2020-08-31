@@ -5,6 +5,7 @@ const VALID_DATA = {
   field2: 5,
   field3: 6,
   field4: 7,
+  field5: "1990-01-28",
 };
 
 const example = createModel({
@@ -13,6 +14,12 @@ const example = createModel({
     field2: [R.min(5, "Too small, must be :min or more")],
     field3: [R.max(6, "Too large, must be :max or less")],
     field4: [R.between([7, 9], "Wrong range, must be between :min and :max")],
+    field5: [
+      R.test((data) => {
+        const ts18Years = 1000 * 60 * 60 * 24 * 365 * 18;
+        return new Date(data.field5).getTime() <= Date.now() - ts18Years;
+      }, "You must be 18 or older"),
+    ],
   },
 });
 
@@ -136,5 +143,29 @@ describe("between", () => {
     example.set({ ...VALID_DATA, field4: VALID_DATA.field4 });
     const validation = example.validate();
     expect(validation.errors.field4).toBe(undefined);
+  });
+});
+
+describe("test", () => {
+  const CURRENT_YEAR = new Date().getFullYear();
+  test("failing test function should not pass validation", () => {
+    example.set({ ...VALID_DATA, field5: `${CURRENT_YEAR}-01-28` });
+    const validation = example.validate();
+    expect(validation.valid).toBe(false);
+  });
+  test("passing test function should pass validation", () => {
+    example.set({ ...VALID_DATA, field5: `${CURRENT_YEAR - 18}-01-28` });
+    const validation = example.validate();
+    expect(validation.valid).toBe(true);
+  });
+  test("failing test function should show custom error message", () => {
+    example.set({ ...VALID_DATA, field5: `${CURRENT_YEAR}-01-28` });
+    const validation = example.validate();
+    expect(validation.errors.field5).toBe("You must be 18 or older");
+  });
+  test("passing test function should not show custom error message", () => {
+    example.set({ ...VALID_DATA, field5: `${CURRENT_YEAR - 18}-01-28` });
+    const validation = example.validate();
+    expect(validation.errors.field5).toBe(undefined);
   });
 });
