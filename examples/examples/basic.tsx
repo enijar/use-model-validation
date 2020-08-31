@@ -18,10 +18,10 @@ const person = createModel({
     email: [R.required("This is required")],
     dob: [
       R.required("This is required"),
-      R.test((data) => {
-        console.log(new Date(data.dob).getTime() >= Date.now());
-        return new Date(data.dob).getTime() <= Date.now();
-      }, "Your date of birth can't be in the future"),
+      R.test(
+        (data) => new Date(data.dob).getTime() <= Date.now(),
+        "Your date of birth can't be in the future"
+      ),
       R.test((data) => {
         const TS = Date.now() - 1000 * 60 * 60 * 24 * 365 * 18; // 18 years
         return new Date(data.dob).getTime() <= TS;
