@@ -18,7 +18,10 @@ const person = createModel({
     email: [R.required("This is required")],
     dob: [
       R.required("This is required"),
-      R.min(() => Date.now() - 1000 * 60 * 60 * 24 * 365 * 18),
+      R.min(
+        () => Date.now() - 1000 * 60 * 60 * 24 * 365 * 18,
+        "You must be 18 or older"
+      ), // 18 years
     ],
     rating: [R.between([10, 100])],
   },
@@ -75,7 +78,7 @@ export default function Basic() {
         label="Date of Birth"
         name="dob"
         value={data.dob}
-        type="dob"
+        type="date"
         errors={errors}
         onChange={handleChange}
       />
