@@ -6,6 +6,7 @@ const VALID_DATA = {
   field3: 6,
   field4: 7,
   field5: "1990-01-28",
+  field6: "0",
 };
 
 const example = createModel({
@@ -20,6 +21,7 @@ const example = createModel({
         return new Date(data.field5).getTime() <= Date.now() - ts18Years;
       }, "You must be 18 or older"),
     ],
+    field6: [R.format(/^[0-9]$/, "Must be a single digit number")],
   },
 });
 
@@ -167,5 +169,28 @@ describe("test", () => {
     example.set({ ...VALID_DATA, field5: `${CURRENT_YEAR - 18}-01-28` });
     const validation = example.validate();
     expect(validation.errors.field5).toBe(undefined);
+  });
+});
+
+describe("format", () => {
+  test("value not matching format should not pass validation", () => {
+    example.set({ ...VALID_DATA, field6: `${VALID_DATA.field6}1` });
+    const validation = example.validate();
+    expect(validation.valid).toBe(false);
+  });
+  test("value matching format should pass validation", () => {
+    example.set({ ...VALID_DATA, field6: VALID_DATA.field6 });
+    const validation = example.validate();
+    expect(validation.valid).toBe(true);
+  });
+  test("value not matching format should show custom error message", () => {
+    example.set({ ...VALID_DATA, field6: `${VALID_DATA.field6}1` });
+    const validation = example.validate();
+    expect(validation.errors.field6).toBe("Must be a single digit number");
+  });
+  test("value matching format should not show custom error message", () => {
+    example.set({ ...VALID_DATA, field6: VALID_DATA.field6 });
+    const validation = example.validate();
+    expect(validation.errors.field6).toBe(undefined);
   });
 });
