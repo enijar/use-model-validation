@@ -12,6 +12,9 @@ export function length(normal, [min = 0, max = Infinity]): boolean {
   if (normal.type === "file") {
     size = normal.size;
   }
+  if (normal.type === "number") {
+    size = normal.value;
+  }
   if (normal.type === "object") {
     if (normal.value.hasOwnProperty("length")) {
       size = normal.value.length;

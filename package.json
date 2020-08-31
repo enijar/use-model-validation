@@ -1,18 +1,42 @@
 {
   "private": true,
+  "type": "module",
   "scripts": {
     "examples": "npx webpack-dev-server --mode development",
     "format": "npx prettier@^2.0.5 lib --write",
-    "build": "npx tsc -p tsconfig.lib.json"
+    "build": "npx tsc -p tsconfig.lib.json",
+    "test": "npx jest",
+    "test-watch": "npx jest --watch"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/lib/"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json",
+      "node"
+    ],
+    "preset": "ts-jest"
+  },
+  "standard": {
+    "env": [
+      "jest"
+    ]
   },
   "devDependencies": {
+    "@types/jest": "^26.0.10",
     "@types/react": "^16.9.44",
     "@types/react-dom": "^16.9.8",
     "html-webpack-plugin": "^4.3.0",
+    "jest": "^26.4.2",
     "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "ts-jest": "^26.3.0",
     "ts-loader": "^8.0.2",
+    "ts-node": "^9.0.0",
     "typescript": "^3.9.7",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",

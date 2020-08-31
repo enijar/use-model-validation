@@ -10,10 +10,12 @@ const R: ruleMethodsType = {
     if (typeof min === "function") {
       min = min();
     }
-    return (normal) => ({
-      pass: !length(normal, [1]) ? true : length(normal, [min, Infinity]),
-      message: formatMessage(message, { min }),
-    });
+    return (normal) => {
+      return {
+        pass: !length(normal, [1]) ? true : length(normal, [min, Infinity]),
+        message: formatMessage(message, { min }),
+      };
+    };
   },
   max(max, message = "Too large, max: :max") {
     if (typeof max === "function") {
