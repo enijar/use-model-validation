@@ -1,7 +1,6 @@
 {
   "private": false,
   "name": "use-model-validation",
-  "type": "module",
   "version": "0.0.2",
   "main": "build/index.js",
   "types": "build/index.d.ts",
