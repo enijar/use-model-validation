@@ -29,7 +29,7 @@ export function formatMessage(message, params = {}): string {
     if (!params.hasOwnProperty(param)) {
       continue;
     }
-    formattedMessage = formattedMessage.replace(`:param`, params[param]);
+    formattedMessage = formattedMessage.replace(`:${param}`, params[param]);
   }
   return formattedMessage;
 }
