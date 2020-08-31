@@ -1,8 +1,11 @@
 import * as React from "react";
-import { R, createModel } from "../../lib";
+import { createModel, R } from "../../lib";
 import Field from "../components/field";
 
 const person = createModel({
+  data: {
+    rating: 0,
+  },
   rules: {
     firstName: [
       R.required("This is required"),
@@ -13,6 +16,11 @@ const person = createModel({
       R.max(20, "Too long, must be :max characters or less"),
     ],
     email: [R.required("This is required")],
+    dob: [
+      R.required("This is required"),
+      R.min(() => Date.now() - 1000 * 60 * 60 * 24 * 365 * 18),
+    ],
+    rating: [R.between([10, 100])],
   },
 });
 
@@ -30,7 +38,12 @@ export default function Basic() {
 
   const handleChange = React.useCallback(
     ({ target }) => {
-      setData(person.update({ [target.name]: target.value }));
+      const name = target.name;
+      let value = target.value;
+      if (name === "date") {
+        value = new Date(value);
+      }
+      setData(person.update({ [name]: value }));
     },
     [setData]
   );
@@ -55,6 +68,25 @@ export default function Basic() {
         label="Email"
         name="email"
         value={data.email}
+        errors={errors}
+        onChange={handleChange}
+      />
+      <Field
+        label="Date of Birth"
+        name="dob"
+        value={data.dob}
+        type="dob"
+        errors={errors}
+        onChange={handleChange}
+      />
+      <Field
+        label="Rating"
+        name="rating"
+        min={0}
+        max={5}
+        steps={1}
+        value={data.rating}
+        type="range"
         errors={errors}
         onChange={handleChange}
       />
