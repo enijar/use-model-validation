@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/Enijar/use-model"
   },
+  "description": "Store data in a model and validate that data",
+  "author": "Enijar",
+  "license": "MIT",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
