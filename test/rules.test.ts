@@ -7,6 +7,7 @@ const VALID_DATA = {
   field4: 7,
   field5: "1990-01-28",
   field6: "0",
+  field7: "12345",
 };
 
 const example = createModel({
@@ -22,6 +23,7 @@ const example = createModel({
       }, "You must be 18 or older"),
     ],
     field6: [R.format(/^[0-9]$/, "Must be a single digit number")],
+    field7: [R.required("Required"), R.max(5, "Too large, must be :max or less")],
   },
 });
 
@@ -192,5 +194,22 @@ describe("format", () => {
     example.set({ ...VALID_DATA, field6: VALID_DATA.field6 });
     const validation = example.validate();
     expect(validation.errors.field6).toBe(undefined);
+  });
+});
+
+describe("mixed", () => {
+  test("empty value should not pass required rule", () => {
+    example.set({ ...VALID_DATA, field7: "" });
+    const validation = example.validate();
+    console.log(validation.errors);
+    expect(validation.valid).toBe(false);
+    expect(validation.errors.field7).toBe("Required");
+  });
+  test("value greater than max should not pass max rule", () => {
+    example.set({ ...VALID_DATA, field7: `${VALID_DATA.field7}1` });
+    const validation = example.validate();
+    console.log(validation.errors);
+    expect(validation.valid).toBe(false);
+    expect(validation.errors.field7).toBe("Too large, must be 5 or less");
   });
 });

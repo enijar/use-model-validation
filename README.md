@@ -70,7 +70,7 @@ R.add(
 
 Documentation of built-in rules.
 
-| Rule | Description | Example |
+| Rule | Description | Usage |
 |---|---|---|
 | required | Check if any file, string, number, or array value has a size > 0 | `R.required("Required")` |
 | min | Check if any file, string, number, or array value has a size > min | `R.min(1, "Too small, must be :min or more")` |
