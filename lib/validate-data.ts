@@ -1,4 +1,4 @@
-import { validationType, dataType, rulesType } from "./types";
+import { dataType, rulesType, validationType } from "./types";
 import normalizeValue from "./normalize-value";
 
 export default function validate(

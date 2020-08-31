@@ -1,7 +1,7 @@
-import { rules } from "./types";
-import { length, formatMessage, pattern } from "./utils";
+import { ruleMethodsType } from "./types";
+import { formatMessage, length, pattern } from "./utils";
 
-const R: rules = {
+const R: ruleMethodsType = {
   required: (message = "Required") => (normal) => ({
     pass: length(normal, [1, Infinity]),
     message: formatMessage(message),

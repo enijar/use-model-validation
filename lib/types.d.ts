@@ -20,6 +20,6 @@ export type rulesType = {
   [key: string]: Array<Function>;
 };
 
-export type rules = {
+export type ruleMethodsType = {
   [key: string]: Function;
 };

@@ -1,5 +1,5 @@
 import validateData from "./validate-data";
-import {dataType, validationType} from "./types";
+import { dataType, validationType } from "./types";
 
 export default function createModel({ rules, data = {} }) {
   function update(freshData = {}) {
