@@ -4,7 +4,8 @@
   "type": "module",
   "version": "0.0.0",
   "repository": {
-    "git": "https://github.com/Enijar/use-model"
+    "type": "git",
+    "url": "https://github.com/Enijar/use-model"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
