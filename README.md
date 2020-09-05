@@ -1,6 +1,6 @@
 # Use Model
 
-Create, update, and validate a model with data from a form.
+Store data in a model and validate that data anywhere
 
 ### Example Usage
 
@@ -17,14 +17,13 @@ const person = createModel({
 });
 
 // Update the person model with some data
-console.log(person.update({ email: "test" }));
-console.log(person.update({ firstName: "James", lastName: "Craig" }));
-
-// Set model data (pass an empty object to reset data)
-console.log(person.set({}));
+console.log(person.update({ firstName: "James", lastName: "Craig", email: "test" }));
 
 // Validate model, using the rules defined inside createModel
 console.log(person.validate());
+
+// Set model data (pass an empty object to reset data)
+console.log(person.set({}));
 ```
 
 ### Adding Custom Rules

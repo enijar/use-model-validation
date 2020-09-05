@@ -8,7 +8,7 @@
     "type": "git",
     "url": "https://github.com/Enijar/use-model"
   },
-  "description": "Store data in a model and validate that data",
+  "description": "Store data in a model and validate that data anywhere",
   "author": "Enijar",
   "license": "MIT",
   "scripts": {
