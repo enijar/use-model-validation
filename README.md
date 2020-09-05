@@ -2,6 +2,12 @@
 
 Store data in a model and validate that data anywhere
 
+### Installation
+
+```bash
+npm add use-model-validation
+```
+
 ### Example Usage
 
 ```js
