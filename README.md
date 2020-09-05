@@ -77,6 +77,7 @@ Documentation of built-in rules.
 | between | Check if any file, string, number, or array value has a size between min and max | `R.between([1, 2], "Wrong range, must be between :min and :max")` |
 | test | Check if a custom function passes | `R.test((data) => data.field === "blah", "Field must be blah")` |
 | format | Check if a value matches a format | `R.format(/^[0-9]$/, "Must be a single digit number")` |
+| email | Check if a value is a valid email | `R.email("Invalid email")` |
 
 ### Feature Milestones
 
