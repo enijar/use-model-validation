@@ -59,6 +59,12 @@ const R: ruleMethodsType = {
   mobileUS(message = "Invalid mobile number") {
     return this.format(/^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$/, message);
   },
+  postcodeUK(message = "Invalid postcode") {
+    return this.format(/^(([gG][iI][rR] {0,}0[aA]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$/, message);
+  },
+  postcodeUS(message = "Invalid postcode") {
+    return this.format(/^\d{5}(?:[-\s]\d{4})?$/, message);
+  },
 };
 
 // Add a custom rule

@@ -80,6 +80,8 @@ Documentation of built-in rules.
 | email | Check if a value is a valid email | `R.email("Invalid email")` |
 | mobileUK | Check if a value is a valid UK mobile number | `R.mobileUK("Invalid mobile number")` |
 | mobileUS | Check if a value is a valid US mobile number | `R.mobileUS("Invalid mobile number")` |
+| postcodeUK | Check if a value is a valid UK postcode | `R.postcodeUK("Invalid postcode")` |
+| postcodeUS | Check if a value is a valid US postcode | `R.postcodeUS("Invalid postcode")` |
 
 ### Feature Milestones
 

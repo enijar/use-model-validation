@@ -11,6 +11,8 @@ const VALID_DATA = {
   field8: "username@example.com",
   field9: "07123456789",
   field10: "(222) 212-3456",
+  field11: "SW1A 2AA",
+  field12: "37188",
 };
 
 const example = createModel({
@@ -30,6 +32,8 @@ const example = createModel({
     field8: [R.email("Invalid email")],
     field9: [R.mobileUK("Invalid mobile number")],
     field10: [R.mobileUS("Invalid mobile number")],
+    field11: [R.postcodeUK("Invalid postcode")],
+    field12: [R.postcodeUS("Invalid postcode")],
   },
 });
 
@@ -230,7 +234,6 @@ describe("mobileUK", () => {
   test("invalid UK mobile number should not pass validation", () => {
     example.set({ ...VALID_DATA, field9: `9${VALID_DATA.field9}` });
     const validation = example.validate();
-    console.log(validation);
     expect(validation.valid).toBe(false);
   });
   test("valid UK mobile number should pass validation", () => {
@@ -254,7 +257,6 @@ describe("mobileUS", () => {
   test("invalid US mobile number should not pass validation", () => {
     example.set({ ...VALID_DATA, field10: `9${VALID_DATA.field10}` });
     const validation = example.validate();
-    console.log(validation);
     expect(validation.valid).toBe(false);
   });
   test("valid US mobile number should pass validation", () => {
@@ -271,6 +273,52 @@ describe("mobileUS", () => {
     example.set({ ...VALID_DATA, field10: VALID_DATA.field10 });
     const validation = example.validate();
     expect(validation.errors.field10).toBe(undefined);
+  });
+});
+
+describe("postcodeUK", () => {
+  test("invalid UK postcode should not pass validation", () => {
+    example.set({ ...VALID_DATA, field11: "invalid" });
+    const validation = example.validate();
+    expect(validation.valid).toBe(false);
+  });
+  test("valid UK postcode should pass validation", () => {
+    example.set({ ...VALID_DATA, field11: VALID_DATA.field11 });
+    const validation = example.validate();
+    expect(validation.valid).toBe(true);
+  });
+  test("invalid UK postcode should show custom error message", () => {
+    example.set({ ...VALID_DATA, field11: "invalid" });
+    const validation = example.validate();
+    expect(validation.errors.field11).toBe("Invalid postcode");
+  });
+  test("valid UK postcode should not show custom error message", () => {
+    example.set({ ...VALID_DATA, field11: VALID_DATA.field11 });
+    const validation = example.validate();
+    expect(validation.errors.field11).toBe(undefined);
+  });
+});
+
+describe("postcodeUS", () => {
+  test("invalid US postcode should not pass validation", () => {
+    example.set({ ...VALID_DATA, field12: "invalid" });
+    const validation = example.validate();
+    expect(validation.valid).toBe(false);
+  });
+  test("valid US postcode should pass validation", () => {
+    example.set({ ...VALID_DATA, field12: VALID_DATA.field12 });
+    const validation = example.validate();
+    expect(validation.valid).toBe(true);
+  });
+  test("invalid US postcode should show custom error message", () => {
+    example.set({ ...VALID_DATA, field12: "invalid" });
+    const validation = example.validate();
+    expect(validation.errors.field12).toBe("Invalid postcode");
+  });
+  test("valid US postcode should not show custom error message", () => {
+    example.set({ ...VALID_DATA, field12: VALID_DATA.field12 });
+    const validation = example.validate();
+    expect(validation.errors.field12).toBe(undefined);
   });
 });
 
