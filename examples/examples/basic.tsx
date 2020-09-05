@@ -27,7 +27,7 @@ const person = createModel({
         return new Date(data.dob).getTime() <= TS;
       }, "You must be 18 or older"),
     ],
-    rating: [R.between([10, 100])],
+    rating: [R.between([50, 100])],
   },
 });
 
@@ -38,6 +38,10 @@ export default function Basic() {
   const handleSubmit = React.useCallback(
     (event) => {
       event.preventDefault();
+      person.update(data => {
+        data.rating = parseFloat(data.rating);
+        return data;
+      })
       setErrors(person.validate().errors);
     },
     [setErrors]
@@ -85,7 +89,7 @@ export default function Basic() {
         label="Rating"
         name="rating"
         min={0}
-        max={5}
+        max={100}
         steps={1}
         value={data.rating}
         type="range"
