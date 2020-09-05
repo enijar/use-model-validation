@@ -1,5 +1,6 @@
 import * as React from "react";
 import { render } from "react-dom";
+import { hot } from "react-hot-loader/root";
 import config from "./config";
 
 function App() {
@@ -35,4 +36,6 @@ function App() {
   );
 }
 
-render(<App />, document.querySelector("#app"));
+const AppRoot = hot(App);
+
+render(<AppRoot />, document.querySelector("#app"));

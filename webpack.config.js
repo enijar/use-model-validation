@@ -7,10 +7,10 @@ const BUILD_PATH = path.resolve(__dirname, "examples-build");
 module.exports = {
   stats: "minimal",
   target: "web",
-  entry: path.join(SRC_PATH, "index.tsx"),
+  entry: ["react-hot-loader/patch", path.join(SRC_PATH, "index.tsx")],
   output: {
     path: BUILD_PATH,
-    filename: "[name].[contenthash].js",
+    filename: "[name].[hash].js",
     publicPath: "/",
   },
   plugins: [
@@ -21,6 +21,9 @@ module.exports = {
   ],
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
+    alias: {
+      "react-dom": "@hot-loader/react-dom",
+    },
   },
   module: {
     rules: [
