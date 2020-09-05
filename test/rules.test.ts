@@ -9,6 +9,8 @@ const VALID_DATA = {
   field6: "0",
   field7: "12345",
   field8: "username@example.com",
+  field9: "07123456789",
+  field10: "(222) 212-3456",
 };
 
 const example = createModel({
@@ -26,6 +28,8 @@ const example = createModel({
     field6: [R.format(/^[0-9]$/, "Must be a single digit number")],
     field7: [R.required("Required"), R.max(5, "Too large, must be :max or less")],
     field8: [R.email("Invalid email")],
+    field9: [R.mobileUK("Invalid mobile number")],
+    field10: [R.mobileUS("Invalid mobile number")],
   },
 });
 
@@ -219,6 +223,54 @@ describe("email", () => {
     example.set({ ...VALID_DATA, field8: VALID_DATA.field8 });
     const validation = example.validate();
     expect(validation.errors.field8).toBe(undefined);
+  });
+});
+
+describe("mobileUK", () => {
+  test("invalid UK mobile number should not pass validation", () => {
+    example.set({ ...VALID_DATA, field9: `9${VALID_DATA.field9}` });
+    const validation = example.validate();
+    console.log(validation);
+    expect(validation.valid).toBe(false);
+  });
+  test("valid UK mobile number should pass validation", () => {
+    example.set({ ...VALID_DATA, field9: VALID_DATA.field9 });
+    const validation = example.validate();
+    expect(validation.valid).toBe(true);
+  });
+  test("invalid UK mobile number should show custom error message", () => {
+    example.set({ ...VALID_DATA, field9: `9${VALID_DATA.field9}` });
+    const validation = example.validate();
+    expect(validation.errors.field9).toBe("Invalid mobile number");
+  });
+  test("valid UK mobile number should not show custom error message", () => {
+    example.set({ ...VALID_DATA, field9: VALID_DATA.field9 });
+    const validation = example.validate();
+    expect(validation.errors.field9).toBe(undefined);
+  });
+});
+
+describe("mobileUS", () => {
+  test("invalid US mobile number should not pass validation", () => {
+    example.set({ ...VALID_DATA, field10: `9${VALID_DATA.field10}` });
+    const validation = example.validate();
+    console.log(validation);
+    expect(validation.valid).toBe(false);
+  });
+  test("valid US mobile number should pass validation", () => {
+    example.set({ ...VALID_DATA, field10: VALID_DATA.field10 });
+    const validation = example.validate();
+    expect(validation.valid).toBe(true);
+  });
+  test("invalid US mobile number should show custom error message", () => {
+    example.set({ ...VALID_DATA, field10: `9${VALID_DATA.field10}` });
+    const validation = example.validate();
+    expect(validation.errors.field10).toBe("Invalid mobile number");
+  });
+  test("valid US mobile number should not show custom error message", () => {
+    example.set({ ...VALID_DATA, field10: VALID_DATA.field10 });
+    const validation = example.validate();
+    expect(validation.errors.field10).toBe(undefined);
   });
 });
 

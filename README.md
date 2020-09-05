@@ -78,6 +78,8 @@ Documentation of built-in rules.
 | test | Check if a custom function passes | `R.test((data) => data.field === "blah", "Field must be blah")` |
 | format | Check if a value matches a format | `R.format(/^[0-9]$/, "Must be a single digit number")` |
 | email | Check if a value is a valid email | `R.email("Invalid email")` |
+| mobileUK | Check if a value is a valid UK mobile number | `R.mobileUK("Invalid mobile number")` |
+| mobileUS | Check if a value is a valid US mobile number | `R.mobileUS("Invalid mobile number")` |
 
 ### Feature Milestones
 
