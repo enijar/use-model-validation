@@ -50,6 +50,9 @@ const R: ruleMethodsType = {
       message: formatMessage(message, { regex }),
     });
   },
+  email(message = "Invalid format") {
+    return this.format(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i, message);
+  },
 };
 
 // Add a custom rule
