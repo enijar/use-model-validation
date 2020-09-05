@@ -35,5 +35,5 @@ export function formatMessage(message, params = {}): string {
 }
 
 export function pattern(normal, regex): boolean {
-  return regex.test(String(normal.value));
+  return regex.test(normal.value);
 }
