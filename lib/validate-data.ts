@@ -13,12 +13,12 @@ export default function validate(
     if (!rules.hasOwnProperty(field)) {
       continue;
     }
-    const normalizedValue = normalizeValue(data[field]);
+    const normal = normalizeValue(data[field]);
     rules[field].forEach((rule) => {
       if (validation.errors.hasOwnProperty(field)) {
         return;
       }
-      const result = rule(normalizedValue, data);
+      const result = rule(normal, data);
       if (!result.pass) {
         validation.valid = false;
         validation.errors[field] = result.message;
