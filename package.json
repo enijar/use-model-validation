@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "use-model-validation",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "repository": {
@@ -54,5 +54,12 @@
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all",
+    "ie 11"
+  ],
+  "dependencies": {}
 }

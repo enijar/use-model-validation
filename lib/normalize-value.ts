@@ -1,6 +1,7 @@
 import { normalizedValueType, valueType } from "./types";
 
-const mode = globalThis?.process?.release?.name || "browser";
+const mode =
+  typeof module !== "undefined" && module.exports ? "node" : "browser";
 
 export default function normalizeValue(value: valueType): normalizedValueType {
   let type: string = typeof value;

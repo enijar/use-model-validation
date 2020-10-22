@@ -2,11 +2,12 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "lib": ["es2016", "dom"],
+    "lib": ["es5", "dom"],
     "declaration": true,
     "outDir": "build",
+    "rootDir": "./lib/",
     "strict": false,
-    "esModuleInterop": true
+    "types": ["node"]
   },
   "exclude": [
     "node_modules",
