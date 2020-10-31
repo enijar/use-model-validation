@@ -8,6 +8,7 @@ export default function validate(
   const validation = {
     errors: {},
     valid: true,
+    data: {},
   };
   for (const field in rules) {
     if (!rules.hasOwnProperty(field)) {
@@ -22,6 +23,9 @@ export default function validate(
       if (!result.pass) {
         validation.valid = false;
         validation.errors[field] = result.message;
+        delete validation.data[field];
+      } else {
+        validation.data[field] = data[field];
       }
     });
   }

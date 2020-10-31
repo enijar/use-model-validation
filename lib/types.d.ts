@@ -10,6 +10,7 @@ export type validationType = {
     [key: string]: string;
   };
   valid: boolean;
+  data: object;
 };
 
 export type dataType = {
