@@ -93,14 +93,19 @@ function NewUser() {
   const onSubmit = React.useCallback(
     async (event) => {
       event.preventDefault();
+
       const { valid, errors, data } = userModel.validate();
+
       setErrors(errors);
+
       if (valid) {
         const res = await fetch("/api/new-user", {
           method: "post",
           body: JSON.stringify(data),
         });
+
         const body = await res.json();
+
         if (res.status === 422) {
           setErrors(body);
         } else {
@@ -135,6 +140,8 @@ function NewUser() {
   );
 }
 ```
+
+In the above example, the model rules are validated once and the validation logic is reused on the client and server. This allows for code sharing for full-stack JS apps.
 
 ### Adding Custom Rules
 
