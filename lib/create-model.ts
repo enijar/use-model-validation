@@ -1,5 +1,6 @@
 import validateData from "./validate-data";
 import { dataType, validationType } from "./types";
+import emitter from "./emitter";
 
 export default function createModel({ rules, data = {} }) {
   function update(freshData: dataType | Function = {}) {
@@ -12,6 +13,7 @@ export default function createModel({ rules, data = {} }) {
       }
       data[field] = freshData[field];
     }
+    return get();
   }
 
   function get() {
@@ -34,22 +36,33 @@ export default function createModel({ rules, data = {} }) {
       }
       data[field] = newData[field];
     }
+    return get();
   }
 
   return {
     set(data: dataType | Function): dataType {
-      set(data);
-      return this.get();
+      const newData = set(data);
+      emitter.emit("set", newData);
+      return newData;
     },
     update(data: dataType | Function): dataType {
-      update(data);
-      return get();
+      const newData = update(data);
+      emitter.emit("update", newData);
+      return newData;
     },
     validate(): validationType {
-      return validateData(data, rules);
+      const result = validateData(data, rules);
+      emitter.emit("validate", result);
+      return result;
     },
     get(): dataType {
       return get();
+    },
+    on(event, fn) {
+      emitter.on(event, fn);
+    },
+    off(event, fn) {
+      emitter.off(event, fn);
     },
   };
 }

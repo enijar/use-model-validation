@@ -24,3 +24,7 @@ export type rulesType = {
 export type ruleMethodsType = {
   [key: string]: Function;
 };
+
+export type EventsType = {
+  [key: string]: Array<Function>;
+};

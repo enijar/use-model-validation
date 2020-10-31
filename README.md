@@ -91,7 +91,7 @@ Documentation of built-in rules.
 
 ### Feature Milestones
 
-- [ ] Event emitter per model
+- [x] Event emitter per model
 - [ ] Global event emitter for all models (created, updated, error)
 - [ ] Global field rule definitions
 - [ ] Global field error message definitions
