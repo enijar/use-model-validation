@@ -7,14 +7,9 @@
     "outDir": "build",
     "rootDir": "./lib/",
     "strict": false,
-    "types": ["node"]
+    "types": ["node", "reflect-metadata", "jest"],
+    "typeRoots": ["node_modules/@types"]
   },
-  "exclude": [
-    "node_modules",
-    "build"
-  ],
-  "include": [
-    "lib/**/*",
-    "lib/types.d.ts"
-  ]
+  "exclude": ["node_modules", "build", "integration", "coverage"],
+  "include": ["lib/**/*", "lib/types.d.ts"]
 }
