@@ -145,41 +145,27 @@ In the above example, the model rules are validated once and the validation logi
 
 ### Adding Custom Rules
 
-You can add a custom rule to the validator `R` object.
-
-#### Basic Example
+You can add any custom rule to the validator by defining a function and using the `R.test` rule:
 
 ```js
 import { R, utils } from "use-model-validation";
 
-R.add("barcode", (message = "Invalid barcode") => {
-  return (normal) => ({
-    // utils.length makes this rule optional so it can be used with R.required
-    pass: !utils.length(normal, [1])
-      ? true
-      : /^123456\d{8}$/.test(normal.value),
-    message,
-  });
+// Custom rule to check if a field matches another field
+function match(fields, message) {
+  return R.test((data) => {
+    return data[fields[0]] === data[fields[1]];
+  }, message);
+}
+
+const newPassword = createModel({
+  rules: {
+    password: [R.required("This field is required")],
+    passwordConfirmation: [
+      R.required("This field is required"),
+      match(["password", "passwordConfirmation"], "Passwords don't match"),
+    ],
+  },
 });
-```
-
-#### Example with Params
-
-```js
-import { R, utils } from "use-model-validation";
-
-R.add(
-  "between",
-  ([min, max], message = "Out of range, must be between :min and :max") => {
-    return (normal) => ({
-      // utils.length makes this rule optional so it can be used with R.required
-      pass: !utils.length(normal, [1])
-        ? true
-        : utils.length(normal, [min, max]),
-      message: utils.formatMessage(message, { min, max }),
-    });
-  }
-);
 ```
 
 ### Rules
@@ -189,8 +175,8 @@ Documentation of built-in rules.
 | Rule       | Description                                                                      | Usage                                                             |
 | ---------- | -------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
 | required   | Check if any file, string, number, or array value has a size > 0                 | `R.required("Required")`                                          |
-| min        | Check if any file, string, number, or array value has a size >= min               | `R.min(1, "Too small, must be :min or more")`                     |
-| max        | Check if any file, string, number, or array value has a size <= max               | `R.min(2, "Too large, must be :max or less")`                     |
+| min        | Check if any file, string, number, or array value has a size >= min              | `R.min(1, "Too small, must be :min or more")`                     |
+| max        | Check if any file, string, number, or array value has a size <= max              | `R.min(2, "Too large, must be :max or less")`                     |
 | between    | Check if any file, string, number, or array value has a size between min and max | `R.between([1, 2], "Wrong range, must be between :min and :max")` |
 | test       | Check if a custom function passes                                                | `R.test((data) => data.field === "blah", "Field must be blah")`   |
 | format     | Check if a value matches a format                                                | `R.format(/^[0-9]$/, "Must be a single digit number")`            |
