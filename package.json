@@ -14,13 +14,15 @@
   "scripts": {
     "format": "npx prettier@^2.0.5 lib --write",
     "build": "npx tsc -p tsconfig.lib.json",
-    "test": "npx jest",
+    "test": "npx jest --collectCoverage",
     "test-watch": "npx jest --watchAll",
     "prepublishOnly": "npm test && npm run build"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
-      "<rootDir>/lib/"
+      "<rootDir>/build/",
+      "<rootDir>/integration/",
+      "<rootDir>/node_modules/"
     ],
     "moduleFileExtensions": [
       "ts",

@@ -193,4 +193,4 @@ Documentation of built-in rules.
 - [ ] Global field rule definitions
 - [ ] Global field error message definitions
 - [x] Better TypeScript support
-- [x] 100% test coverage
+- [ ] 100% test coverage
