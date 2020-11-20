@@ -58,3 +58,39 @@ describe("model data", () => {
     expect(data).toEqual({});
   });
 });
+
+describe("model events", () => {
+  test("set event is emitted when model.set is called", () => {
+    const fn = jest.fn();
+    person.on("set", fn);
+    person.set({ firstName: "Test" });
+    expect(fn.mock.calls.length).toBe(1);
+  });
+  test("set event is not emitted when model.set is not called", () => {
+    const fn = jest.fn();
+    person.on("set", fn);
+    expect(fn.mock.calls.length).toBe(0);
+  });
+  test("update event is emitted when model.update is called", () => {
+    const fn = jest.fn();
+    person.on("update", fn);
+    person.update({ firstName: "Test" });
+    expect(fn.mock.calls.length).toBe(1);
+  });
+  test("update event is not emitted when model.update is not called", () => {
+    const fn = jest.fn();
+    person.on("update", fn);
+    expect(fn.mock.calls.length).toBe(0);
+  });
+  test("validate event is emitted when model.validate is called", () => {
+    const fn = jest.fn();
+    person.on("validate", fn);
+    person.validate();
+    expect(fn.mock.calls.length).toBe(1);
+  });
+  test("validate event is not emitted when model.validate is not called", () => {
+    const fn = jest.fn();
+    person.on("validate", fn);
+    expect(fn.mock.calls.length).toBe(0);
+  });
+});
