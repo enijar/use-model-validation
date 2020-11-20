@@ -186,11 +186,11 @@ Documentation of built-in rules.
 | postcodeUK | Check if a value is a valid UK postcode                                          | `R.postcodeUK("Invalid postcode")`                                |
 | postcodeUS | Check if a value is a valid US postcode                                          | `R.postcodeUS("Invalid postcode")`                                |
 
-### Feature Milestones
+### Milestones
 
 - [x] Event emitter per model
 - [ ] Global event emitter for all models (created, updated, error)
 - [ ] Global field rule definitions
 - [ ] Global field error message definitions
 - [x] Better TypeScript support
-- [ ] 100% test coverage
+- [ ] \>85% test coverage
