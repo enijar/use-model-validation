@@ -2,7 +2,7 @@ lib/
 test/
 .idea/
 integration/
+coverage/
 .DS_Store
 .editorconfig
-README.md
 tsconfig.lib.json
