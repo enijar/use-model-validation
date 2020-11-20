@@ -93,4 +93,11 @@ describe("model events", () => {
     person.on("validate", fn);
     expect(fn.mock.calls.length).toBe(0);
   });
+  test("events are not called when off is called", () => {
+    const fn = jest.fn();
+    person.on("set", fn);
+    person.off("set", fn);
+    person.set({ firstName: "Test" });
+    expect(fn.mock.calls.length).toBe(0);
+  });
 });
