@@ -189,8 +189,8 @@ Documentation of built-in rules.
 | Rule       | Description                                                                      | Usage                                                             |
 | ---------- | -------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
 | required   | Check if any file, string, number, or array value has a size > 0                 | `R.required("Required")`                                          |
-| min        | Check if any file, string, number, or array value has a size > min               | `R.min(1, "Too small, must be :min or more")`                     |
-| max        | Check if any file, string, number, or array value has a size < max               | `R.min(2, "Too large, must be :max or less")`                     |
+| min        | Check if any file, string, number, or array value has a size >= min               | `R.min(1, "Too small, must be :min or more")`                     |
+| max        | Check if any file, string, number, or array value has a size <= max               | `R.min(2, "Too large, must be :max or less")`                     |
 | between    | Check if any file, string, number, or array value has a size between min and max | `R.between([1, 2], "Wrong range, must be between :min and :max")` |
 | test       | Check if a custom function passes                                                | `R.test((data) => data.field === "blah", "Field must be blah")`   |
 | format     | Check if a value matches a format                                                | `R.format(/^[0-9]$/, "Must be a single digit number")`            |
