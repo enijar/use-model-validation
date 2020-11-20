@@ -6,7 +6,7 @@
   "types": "build/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Enijar/use-model"
+    "url": "https://github.com/Enijar/use-model-validation"
   },
   "description": "Store data in a model and validate that data anywhere",
   "author": "Enijar",
