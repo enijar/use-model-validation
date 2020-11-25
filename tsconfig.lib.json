@@ -7,7 +7,7 @@
     "outDir": "build",
     "rootDir": "./lib/",
     "strict": false,
-    "types": ["node", "reflect-metadata", "jest"],
+    "types": ["node", "jest"],
     "typeRoots": ["node_modules/@types"]
   },
   "exclude": ["node_modules", "build", "integration", "coverage"],
