@@ -187,6 +187,101 @@ Documentation of built-in rules.
 | postcodeUK | Check if a value is a valid UK postcode                                          | `R.postcodeUK("Invalid postcode")`                                |
 | postcodeUS | Check if a value is a valid US postcode                                          | `R.postcodeUS("Invalid postcode")`                                |
 
+### Model API
+
+#### set
+
+Override data on the model, e.g.:
+
+```js
+// Delete all fields
+model.set({});
+
+// Override firstName field but leave other fields untouched
+mode.set((data) => {
+  data.firstName = data.firstName.toUpperCase();
+  return data;
+});
+```
+
+#### update
+
+Similar to `set` except fields will not be reset, e.g.:
+
+```js
+// Update only the firstName field
+model.update({ firstName: "Test" });
+
+// Uppercase all fields
+model.update((data) => {
+  for (const field in data) {
+    data[field].toUpperCase();
+  }
+  return data;
+});
+```
+
+#### validate
+
+Validate the model and return errors (object), valid (boolean), and data (object), e.g.:
+
+```js
+const { errors, valid, data } = model.validate();
+
+if (valid) {
+  console.log(data);
+} else {
+  console.log(errors);
+}
+```
+
+#### fresh
+
+Create a fresh instance of the model, e.g.:
+
+```js
+const newModel = model.fresh({ firstName: "New" });
+
+const { firstName: firstName1 } = model.get();
+const { firstName: firstName2 } = newModel.get();
+
+// firstName1 will now be different from firstName2
+```
+
+#### get
+
+Get data stored in the model, e.g.:
+
+```js
+model.set({ firstName: "Foo", lastName: "Bar" });
+const data = model.get();
+// data will now contain: { firstName: "Foo", lastName: "Bar" }
+```
+
+#### on/off
+
+Add/remove event listener, e.g.:
+
+```js
+function onSet(newData) {
+  console.log(newData);
+}
+function onUpdate(newData) {
+  console.log(newData);
+}
+function onValidate(result) {
+  console.log(result);
+}
+
+// Add/remove listeners
+model.on("set", onSet);
+model.off("set", onSet);
+model.on("update", onUpdate);
+model.off("update", onUpdate);
+model.on("validate", onValidate);
+model.off("validate", onValidate);
+```
+
 ### Milestones
 
 - [x] Event emitter per model
