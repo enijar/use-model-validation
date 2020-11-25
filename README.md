@@ -63,9 +63,10 @@ module.exports = createModel({
 const userModel = require("/shared/models/user-model.js");
 
 function newUser(req, res) {
-  userModel.set(req.body);
+  // Make a fresh instance of the model (to avoid race conditions)
+  const user = userModel.fresh(req.body);
 
-  const { valid, errors, data } = userModel.validate();
+  const { valid, errors, data } = user.validate();
 
   if (!valid) {
     res.status(422).json({ errors });

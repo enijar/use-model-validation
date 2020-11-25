@@ -101,3 +101,19 @@ describe("model events", () => {
     expect(fn.mock.calls.length).toBe(0);
   });
 });
+
+describe("model fresh", () => {
+  test("fresh model can be created from existing without old data", () => {
+    person.set(DATA);
+    expect(person.get()).toEqual(DATA);
+    const newPerson = person.fresh();
+    expect(newPerson.get()).toEqual({});
+  });
+  test("fresh model can be created from existing without old data but containing new data", () => {
+    person.set(DATA);
+    expect(person.get()).toEqual(DATA);
+    const newData = { firstName: "New First Name" };
+    const newPerson = person.fresh(newData);
+    expect(newPerson.get()).toEqual(newData);
+  });
+});

@@ -2,7 +2,7 @@ import validateData from "./validate-data";
 import { dataType, validationType } from "./types";
 import emitter from "./emitter";
 
-export default function createModel({ rules, data = {} }) {
+function model({ rules, data = {} }) {
   function update(freshData: dataType | Function = {}) {
     if (typeof freshData === "function") {
       freshData = { ...freshData(data) };
@@ -55,6 +55,9 @@ export default function createModel({ rules, data = {} }) {
       emitter.emit("validate", result);
       return result;
     },
+    fresh(data = {}) {
+      return model({ rules, data });
+    },
     get(): dataType {
       return get();
     },
@@ -65,4 +68,8 @@ export default function createModel({ rules, data = {} }) {
       emitter.off(event, fn);
     },
   };
+}
+
+export default function createModel({ rules, data = {} }) {
+  return model({ rules, data });
 }
