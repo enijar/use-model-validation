@@ -148,7 +148,7 @@ In the above example, the model rules are validated once and the validation logi
 You can add any custom rule to the validator by defining a function and using the `R.test` rule:
 
 ```js
-import { R, utils } from "use-model-validation";
+import { R } from "use-model-validation";
 
 // Custom rule to check if a field matches another field
 function match(fields, message) {
