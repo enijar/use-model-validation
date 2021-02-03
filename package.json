@@ -3,7 +3,7 @@
   "name": "use-model-validation",
   "version": "0.1.4",
   "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "types": "build/types.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/Enijar/use-model-validation"
