@@ -1,8 +1,8 @@
 import validateData from "./validate-data";
-import { dataType, validationType } from "./types";
+import { Model, dataType, validationType } from "./types";
 import emitter from "./emitter";
 
-function model({ rules, data = {} }) {
+function model({ rules, data = {} }): Model {
   function update(freshData: dataType | Function = {}) {
     if (typeof freshData === "function") {
       freshData = { ...freshData(data) };
@@ -55,16 +55,16 @@ function model({ rules, data = {} }) {
       emitter.emit("validate", result);
       return result;
     },
-    fresh(data = {}) {
+    fresh(data: dataType = {}) {
       return model({ rules, data });
     },
     get(): dataType {
       return get();
     },
-    on(event, fn) {
+    on(event: string, fn: Function) {
       emitter.on(event, fn);
     },
-    off(event, fn) {
+    off(event: string, fn: Function) {
       emitter.off(event, fn);
     },
   };

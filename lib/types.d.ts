@@ -28,3 +28,13 @@ export type ruleMethodsType = {
 export type EventsType = {
   [key: string]: Array<Function>;
 };
+
+export type Model = {
+  set: (data: dataType | Function) => dataType;
+  update: (data: dataType | Function) => dataType;
+  validate: () => validationType;
+  fresh: (data?: dataType) => Model;
+  get: () => dataType;
+  on: (event: string, fn: Function) => void;
+  off: (event: string, fn: Function) => void;
+};
