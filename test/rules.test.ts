@@ -13,6 +13,10 @@ const VALID_DATA = {
   field10: "(222) 212-3456",
   field11: "SW1A 2AA",
   field12: "37188",
+  field13: {
+    field14: "1",
+    field15: 2,
+  },
 };
 
 const example = createModel({
@@ -37,6 +41,8 @@ const example = createModel({
     field10: [R.mobileUS("Invalid mobile number")],
     field11: [R.postcodeUK("Invalid postcode")],
     field12: [R.postcodeUS("Invalid postcode")],
+    "field13.field14": [R.required("Required")],
+    "field13.field15": [R.required("Required")],
   },
 });
 
@@ -60,6 +66,17 @@ describe("required", () => {
     example.set({ ...VALID_DATA, field1: "1" });
     const validation = example.validate();
     expect(validation.errors.field1).toBe(undefined);
+  });
+  test("empty value should not pass required rule", () => {
+    example.set({ ...VALID_DATA, field13: { field14: "" } });
+    const validation = example.validate();
+    expect(validation.valid).toBe(false);
+    expect(validation.errors["field13.field14"]).toBe("Required");
+  });
+  test("non-empty value should pass validation", () => {
+    example.set({ ...VALID_DATA });
+    const validation = example.validate();
+    expect(validation.valid).toBe(true);
   });
 });
 

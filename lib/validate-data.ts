@@ -1,10 +1,8 @@
+import { get as _get, set as _set, unset as _unset, has as _has } from "lodash";
 import { Data, Rules, Validation } from "./types";
 import normalizeValue from "./normalize-value";
 
-export default function validate(
-  data: Data,
-  rules: Rules = {}
-): Validation {
+export default function validate(data: Data, rules: Rules = {}): Validation {
   const validation = {
     errors: {},
     valid: true,
@@ -14,20 +12,22 @@ export default function validate(
     if (!rules.hasOwnProperty(field)) {
       continue;
     }
-    const normal = normalizeValue(data[field]);
-    rules[field].forEach((rule) => {
-      if (validation.errors.hasOwnProperty(field)) {
-        return;
+    const value = _get(data, field);
+    const normal = normalizeValue(value);
+    for (const rule of rules[field]) {
+      if (_has(validation.errors, field)) {
+        continue;
       }
       const result = rule(normal, data);
       if (!result.pass) {
         validation.valid = false;
         validation.errors[field] = result.message;
-        delete validation.data[field];
+        _unset(validation.data, field);
       } else {
-        validation.data[field] = data[field];
+        const value = _get(data, field);
+        _set(validation.data, field, value);
       }
-    });
+    }
   }
   return validation;
 }

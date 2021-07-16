@@ -1,3 +1,4 @@
+import { get as _get, set as _set, unset as _unset } from "lodash";
 import validateData from "./validate-data";
 import { Model, Data, Validation } from "./types";
 import emitter from "./emitter";
@@ -11,7 +12,8 @@ function model({ rules, data = {} }): Model {
       if (!freshData.hasOwnProperty(field)) {
         continue;
       }
-      data[field] = freshData[field];
+      const value = _get(freshData, field);
+      _set(data, field, value);
     }
     return get();
   }
@@ -28,13 +30,14 @@ function model({ rules, data = {} }): Model {
       if (!data.hasOwnProperty(field)) {
         continue;
       }
-      delete data[field];
+      _unset(data, field);
     }
     for (const field in newData) {
       if (!newData.hasOwnProperty(field)) {
         continue;
       }
-      data[field] = newData[field];
+      const value = _get(newData, field);
+      _set(data, field, value);
     }
     return get();
   }
