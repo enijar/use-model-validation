@@ -1,4 +1,4 @@
-import { get as _get, set as _set, unset as _unset, has as _has } from "lodash";
+import { get as _get, set as _set, unset as _unset } from "lodash";
 import { Data, Rules, Validation } from "./types";
 import normalizeValue from "./normalize-value";
 
@@ -15,7 +15,7 @@ export default function validate(data: Data, rules: Rules = {}): Validation {
     const value = _get(data, field);
     const normal = normalizeValue(value);
     for (const rule of rules[field]) {
-      if (_has(validation.errors, field)) {
+      if (validation.errors.hasOwnProperty(field)) {
         continue;
       }
       const result = rule(normal, data);
