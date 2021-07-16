@@ -18,6 +18,10 @@ const model = createModel({
     firstName: [R.max(10, "Too long, must be :max characters or less")],
     lastName: [R.max(20, "Too long, must be :max characters or less")],
     email: [R.required("Email is required")],
+    // Supports deeply nested rules
+    user: {
+      password: [R.required("Password is required")],
+    },
   },
 });
 
