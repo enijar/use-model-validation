@@ -12,6 +12,6 @@
   },
   "exclude": ["node_modules", "build", "integration", "coverage"],
   "include": ["lib/**/*",
-    "lib/types.d.ts"
+    "lib/types.ts"
   ]
 }

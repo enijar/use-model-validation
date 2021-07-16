@@ -1,28 +1,37 @@
-import { NormalizedValue, Value } from "./types";
+import { NormalizedValue, Value, ValueType } from "./types";
 
 const mode =
   typeof module !== "undefined" && module.exports ? "node" : "browser";
 
 export default function normalizeValue(value: Value): NormalizedValue {
-  let type: string = typeof value;
+  let type;
   let normal: Value = value;
+  const t = (typeof value).toLowerCase();
 
-  switch (type) {
-    case "string":
+  switch (t) {
+    case ValueType.string:
       normal = value.trim();
+      type = ValueType.string;
       break;
-    case "number":
+    case ValueType.number:
       normal = parseFloat(value);
+      type = ValueType.number;
+      break;
+    case ValueType.boolean:
+      type = ValueType.boolean;
+      break;
+    case ValueType.object:
+      type = ValueType.object;
       break;
     default:
       if (Array.isArray(value)) {
-        type = "array";
+        type = ValueType.array;
       }
       if (mode === "browser" && value instanceof File) {
-        type = "file";
+        type = ValueType.file;
       }
       if ([undefined, null].indexOf(value) > -1) {
-        type = "nullish";
+        type = ValueType.nullish;
         normal = null;
       }
   }

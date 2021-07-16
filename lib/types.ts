@@ -8,8 +8,18 @@ export type Data = {
   [key: string]: Value;
 };
 
+export enum ValueType {
+  string = "string",
+  number = "number",
+  array = "array",
+  file = "file",
+  nullish = "nullish",
+  boolean = "boolean",
+  object = "object",
+}
+
 export type NormalizedValue = {
-  type: string;
+  type: ValueType;
   value: Value;
 };
 

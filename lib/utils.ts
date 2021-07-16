@@ -1,24 +1,29 @@
+import {ValueType} from "./types";
+
 export function length(normal, [min = 0, max = Infinity]): boolean {
   let size = 0;
-  if (normal.type === "nullish") {
-    size = 0;
-  }
-  if (normal.type === "boolean") {
-    size = normal.value ? 1 : 0;
-  }
-  if (normal.type === "string") {
-    size = normal.value.length;
-  }
-  if (normal.type === "file") {
-    size = normal.size;
-  }
-  if (normal.type === "number") {
-    size = normal.value;
-  }
-  if (normal.type === "object") {
-    if (normal.value.hasOwnProperty("length")) {
+  switch (normal.type) {
+    case ValueType.nullish:
+      size = 0;
+      break;
+    case ValueType.boolean:
+      size = normal.value ? 1 : 0;
+      break;
+    case ValueType.string:
       size = normal.value.length;
-    }
+      break;
+    case ValueType.file:
+      size = normal.size;
+      break;
+    case ValueType.number:
+      size = normal.value;
+      break;
+    default:
+      if (normal.type === ValueType.object) {
+        if (normal.value.hasOwnProperty("length")) {
+          size = normal.value.length;
+        }
+      }
   }
   return size >= min && size <= max;
 }
