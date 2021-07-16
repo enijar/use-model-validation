@@ -1,11 +1,11 @@
-import { normalizedValueType, valueType } from "./types";
+import { NormalizedValue, Value } from "./types";
 
 const mode =
   typeof module !== "undefined" && module.exports ? "node" : "browser";
 
-export default function normalizeValue(value: valueType): normalizedValueType {
+export default function normalizeValue(value: Value): NormalizedValue {
   let type: string = typeof value;
-  let normal: valueType = value;
+  let normal: Value = value;
 
   switch (type) {
     case "string":

@@ -1,9 +1,9 @@
 import validateData from "./validate-data";
-import { Model, dataType, validationType } from "./types";
+import { Model, Data, Validation } from "./types";
 import emitter from "./emitter";
 
 function model({ rules, data = {} }): Model {
-  function update(freshData: dataType | Function = {}) {
+  function update(freshData: Data | Function = {}) {
     if (typeof freshData === "function") {
       freshData = { ...freshData(data) };
     }
@@ -20,7 +20,7 @@ function model({ rules, data = {} }): Model {
     return { ...data };
   }
 
-  function set(newData: dataType | Function) {
+  function set(newData: Data | Function) {
     if (typeof newData === "function") {
       newData = { ...newData(data) };
     }
@@ -40,25 +40,25 @@ function model({ rules, data = {} }): Model {
   }
 
   return {
-    set(data: dataType | Function): dataType {
+    set(data: Data | Function): Data {
       const newData = set(data);
       emitter.emit("set", newData);
       return newData;
     },
-    update(data: dataType | Function): dataType {
+    update(data: Data | Function): Data {
       const newData = update(data);
       emitter.emit("update", newData);
       return newData;
     },
-    validate(): validationType {
+    validate(): Validation {
       const result = validateData(data, rules);
       emitter.emit("validate", result);
       return result;
     },
-    fresh(data: dataType = {}) {
+    fresh(data: Data = {}) {
       return model({ rules, data });
     },
-    get(): dataType {
+    get(): Data {
       return get();
     },
     on(event: string, fn: Function) {

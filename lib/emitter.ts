@@ -1,6 +1,6 @@
-import { EventsType } from "./types";
+import { Events } from "./types";
 
-const events: EventsType = {};
+const events: Events = {};
 
 export default {
   on(event: string, fn: Function) {

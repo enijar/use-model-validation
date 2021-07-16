@@ -1,10 +1,10 @@
-import { dataType, rulesType, validationType } from "./types";
+import { Data, Rules, Validation } from "./types";
 import normalizeValue from "./normalize-value";
 
 export default function validate(
-  data: dataType,
-  rules: rulesType = {}
-): validationType {
+  data: Data,
+  rules: Rules = {}
+): Validation {
   const validation = {
     errors: {},
     valid: true,
