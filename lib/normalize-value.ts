@@ -26,13 +26,20 @@ export default function normalizeValue(value: Value): NormalizedValue {
     default:
       if (Array.isArray(value)) {
         type = ValueType.array;
+        break;
       }
       if (mode === "browser" && value instanceof File) {
         type = ValueType.file;
+        break;
+      }
+      if (mode === "node" && value instanceof Buffer) {
+        type = ValueType.file;
+        break;
       }
       if ([undefined, null].indexOf(value) > -1) {
         type = ValueType.nullish;
         normal = null;
+        break;
       }
   }
 
