@@ -32,7 +32,7 @@ export default function normalizeValue(value: Value): NormalizedValue {
         type = ValueType.file;
         break;
       }
-      if (mode === "node" && value?.buffer instanceof Buffer) {
+      if (mode === "node" && value.hasOwnProperty("buffer")) {
         type = ValueType.file;
         break;
       }
