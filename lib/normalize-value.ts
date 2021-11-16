@@ -22,18 +22,16 @@ export default function normalizeValue(value: Value): NormalizedValue {
       break;
     case ValueType.object:
       type = ValueType.object;
+      if (mode === "browser" && value instanceof File) {
+        type = ValueType.file;
+      }
+      if (mode === "node" && (value ?? {}).hasOwnProperty("buffer")) {
+        type = ValueType.file;
+      }
       break;
     default:
       if (Array.isArray(value)) {
         type = ValueType.array;
-        break;
-      }
-      if (mode === "browser" && value instanceof File) {
-        type = ValueType.file;
-        break;
-      }
-      if (mode === "node" && (value ?? {}).hasOwnProperty("buffer")) {
-        type = ValueType.file;
         break;
       }
       if ([undefined, null].indexOf(value) > -1) {
