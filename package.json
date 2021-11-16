@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "use-model-validation",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "repository": {
